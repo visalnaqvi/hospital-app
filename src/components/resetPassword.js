@@ -5,6 +5,9 @@ import axios from "axios"
 
 const ResetPassword = ()=>{
 
+    //intializing states
+
+    //getting jwt token form params
     const {token} = useParams() 
 
     const [user , setUser] = useState({})
@@ -19,11 +22,14 @@ const ResetPassword = ()=>{
 
     const [success , setSuccess] = useState(false)
 
+    //setting auth header to jwt token value
     useEffect(()=>{
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         validateSession();
     },[token])
 
+
+    //checking is token is still valid or expired
     const validateSession= async ()=>{
         try{
             const response = await axios.get(
@@ -34,7 +40,7 @@ const ResetPassword = ()=>{
                     setIsTokenValid(true)
                 }
             }
-
+            //setting user data if token is still valid
             setUser(response.data)
         } catch (err){
             if(err.response.status === 401){
@@ -43,6 +49,7 @@ const ResetPassword = ()=>{
         }
     }
 
+    //showing error if token not valid
     if(isTokenValid){
         return(
             <div className="m-[20px]">
@@ -52,6 +59,7 @@ const ResetPassword = ()=>{
         )
     }
 
+    //handling form submit
     const handleFormSubmit = async (e)=>{
 
         e.preventDefault();
@@ -59,6 +67,8 @@ const ResetPassword = ()=>{
         let newUser = {...user , password:password}
 
         try{
+
+            //sending request for passsword change with new deatils
             const response = await axios.post("https://backend-for-hospital.onrender.com/api/users/reset-password",
             newUser
             )
@@ -69,14 +79,13 @@ const ResetPassword = ()=>{
                 setIsTokenValid(true);
             }
 
-            console.log("isisdeeeeeeee",response)
-            console.log("ie",response.status)
-
 
             if(response.status===200){
                 setSuccess(true);
             }
         }catch(err){
+
+            //setting error message on some error
             if(err.response.status===404 || err.response.status === 500){
                 setErrMsg("Some Error Occoured")
                 setError(true);

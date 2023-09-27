@@ -12,6 +12,7 @@ import ForgotPassword from "./components/forgotPassword";
 
 function App() {
  
+  //handling routing
   const router = createBrowserRouter([
     {
       path: "login",

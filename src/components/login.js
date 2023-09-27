@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 const Login = ({ type }) => {
+
+    //initalizing states
     const [email, setEmail] = useState("");
 
     const [password, setPassword] = useState("");
@@ -17,6 +19,7 @@ const Login = ({ type }) => {
 
     const [warningMsg , setWarningMsg] = useState(false);
 
+    //setting API value for login and register forms
     useEffect(() => {
         if (type === "login") {
             setUrl("https://backend-for-hospital.onrender.com/api/users/login")
@@ -25,6 +28,7 @@ const Login = ({ type }) => {
         }
     }, [type])
 
+    //handling form submit
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
@@ -34,7 +38,6 @@ const Login = ({ type }) => {
             name: name
         }
 
-        console.log("------------>>>", formData)
 
         try {
             const response = await axios.post(
@@ -42,8 +45,7 @@ const Login = ({ type }) => {
                 formData
             )
 
-            console.log("------>", response);
-
+            //setting token and user data on successfull sign in
             if (response.status === 200) {
                 if (type === 'login') {
                     localStorage.setItem("token", response.data)
@@ -53,13 +55,12 @@ const Login = ({ type }) => {
 
         }
         catch (err) {
-            console.log("------",err)
-            
+            //setting warning message on warnings
             if(err.response.status === 409){
                 setWarning(true)
                 setWarningMsg("User already exists")
             }
-
+            
             if(err.response.status === 400){
                 setWarning(true)
                 setWarningMsg("Incorrect UserID or Password")
