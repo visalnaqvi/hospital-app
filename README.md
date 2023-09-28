@@ -34,9 +34,9 @@ Backend of the application is an express application.
 
 Hosting:[https://backend-for-hospital.onrender.com/](https://backend-for-hospital.onrender.com/)
 
-APIs Available:
+##APIs Available:
 
-End Point: `/register`
+End Point: `/users/register`
 
 Method: POST
 
@@ -46,7 +46,7 @@ Response: new user details
 
 ---
 
-End Point: `/login`
+End Point: `/users/login`
 
 Method:POST
 
@@ -56,7 +56,7 @@ Response: JWT Token for session
 
 ---
 
-End Point: `/validate`
+End Point: `/users/validate`
 
 Method:GET
 
@@ -64,7 +64,7 @@ Responce: Session Details
 
 ---
 
-End Point: `/forgot-password`
+End Point: `/users/forgot-password`
 
 Method:POST
 
@@ -74,7 +74,7 @@ Responce: Status of reset password email
 
 ---
 
-End Point `/reset-password`
+End Point `/users/reset-password`
 
 Method:POST
 
