@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Clone the repo afer which you have to install all the needed dependencies you can run `npm install` to install all the dependencies and then run npm `npm start` in the root directory to start the application
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Front End
 
-### `npm test`
+It is a React appliaction you need to login from some registered credentitals.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Hosting: [https://hospital-app-rose.vercel.app](https://hospital-app-rose.vercel.app) 
 
-### `npm run build`
+You can create a new account if you don't have an exisiting account.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you click on register and create a new account you get redirected to login page where you have to login from newly created account.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If have alreaady created an account and don't remember your password you can click on forgot password on homescreen that will take you too forgot password page where you need to enter your registered email. A password reset link which will expire in 15 mins will be sent to you registerd email.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once you are successfully loged in you will be taken to dashboard screen where you will have 2 option `sign out` and `reset password`
 
-### `npm run eject`
+If you click on sign out your session will exprire and you will be taken to login page.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+If you want to change you password you can click on reset password and then enter your new password.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Backend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Backend of the application is an express application. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### As the backend is deployed on free server so it takes time to respond to the 1st request made from a browser after the first reqest is responded the server runs fine. ###
 
-## Learn More
+### First request will always take upto 15-20 sec to respond due to deployment on free server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Hosting:[https://backend-for-hospital.onrender.com/](https://backend-for-hospital.onrender.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+APIs Available:
 
-### Code Splitting
+End Point: `/register`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Method: POST
 
-### Analyzing the Bundle Size
+Request Body: ```{name:'name',userId:'email',password:'password',role:'optional'}```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Response: new user details
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+End Point: `/login`
 
-### Advanced Configuration
+Method:POST
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Resquest Body: ```{userId:'email',password:'password'}```
 
-### Deployment
+Response: JWT Token for session
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+End Point: `/validate`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Method:GET
+
+Responce: Session Details
+
+---
+
+End Point: `/forgot-password`
+
+Method:POST
+
+Request Body:```{userId:'email'}```
+
+Responce: Status of reset password email
+
+---
+
+End Point `/reset-password`
+
+Method:POST
+
+Request Body: ```{userId:'email',password:'newPassword'}```
+
+Responce: New password details
+
+
