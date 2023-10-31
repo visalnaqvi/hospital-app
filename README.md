@@ -1,5 +1,9 @@
 # Getting Started
 
+you can use these test credentials to log in:
+userId:test@test.test
+pass:test
+
 Clone the repo afer which you have to install all the needed dependencies you can run `npm install` to install all the dependencies and then run npm `npm start` in the root directory to start the application
 
 
